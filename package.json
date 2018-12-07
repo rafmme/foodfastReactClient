@@ -1,0 +1,24 @@
+{
+  "name": "foodfastreactclient",
+  "version": "1.0.0",
+  "description": "this is an implement of the foodfast client [front-end] with the ReactJS library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafmme/foodfastReactClient.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "react-router"
+  ],
+  "author": "Timileyin Farayola",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/rafmme/foodfastReactClient/issues"
+  },
+  "homepage": "https://github.com/rafmme/foodfastReactClient#readme"
+}
