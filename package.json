@@ -1,24 +1,64 @@
 {
-  "name": "foodfastreactclient",
-  "version": "1.0.0",
-  "description": "this is an implement of the foodfast client [front-end] with the ReactJS library",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rafmme/foodfastReactClient.git"
-  },
-  "keywords": [
-    "react",
-    "redux",
-    "react-router"
-  ],
-  "author": "Timileyin Farayola",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/rafmme/foodfastReactClient/issues"
-  },
-  "homepage": "https://github.com/rafmme/foodfastReactClient#readme"
+    "name": "foodfastreactclient",
+    "version": "1.0.0",
+    "description": "this is an implement of the foodfast client [front-end] with the ReactJS library",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rafmme/foodfastReactClient.git"
+    },
+    "keywords": [
+        "react",
+        "redux",
+        "react-router"
+    ],
+    "author": "Timileyin Farayola",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/rafmme/foodfastReactClient/issues"
+    },
+    "homepage": "https://github.com/rafmme/foodfastReactClient#readme",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "keymirror": "^0.1.1",
+        "prop-types": "^15.6.2",
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3",
+        "react-redux": "^6.0.0",
+        "react-router-dom": "^4.3.1",
+        "redux": "^4.0.1",
+        "redux-thunk": "^2.3.0",
+        "yup": "^0.26.6"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.0",
+        "@babel/preset-env": "^7.2.0",
+        "@babel/preset-react": "^7.0.0",
+        "acorn": "^6.0.0",
+        "babel-eslint": "^10.0.1",
+        "babel-loader": "^8.0.4",
+        "css-loader": "^2.0.0",
+        "enzyme": "^3.7.0",
+        "eslint": "^5.9.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-config-prettier": "^3.3.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-prettier": "^3.0.0",
+        "eslint-plugin-react": "^7.11.1",
+        "html-loader": "^0.5.5",
+        "html-webpack-plugin": "^3.2.0",
+        "husky": "^1.2.0",
+        "jest": "^23.6.0",
+        "lint-staged": "^8.1.0",
+        "prettier": "^1.15.3",
+        "pretty-quick": "^1.8.0",
+        "style-loader": "^0.23.1",
+        "webpack": "^4.27.1",
+        "webpack-cli": "^3.1.2",
+        "webpack-dev-server": "^3.1.10"
+    }
 }
