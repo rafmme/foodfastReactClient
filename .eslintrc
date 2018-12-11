@@ -1,0 +1,74 @@
+{
+    "root": true,
+    "extends": ["airbnb", "plugin:jest/recommended", "jest-enzyme"],
+    "env": {
+        "node": true,
+        "browser": true,
+        "es6": true,
+        "mocha": true
+    },
+    "plugins": [
+        "babel",
+        "import",
+        "jsx-a11y",
+        "react",
+        "prettier"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "ecmaFeatures": {
+        "arrowFunctions": true,
+        "blockBindings": true,
+        "classes": true,
+        "defaultParams": true,
+        "destructuring": true,
+        "forOf": true,
+        "generators": true,
+        "modules": true,
+        "spread": true,
+        "templateStrings": false,
+        "jsx": true
+    },
+    "rules": {
+        "one-var": 0,
+        "one-var-declaration-per-line": 0,
+        "new-cap": 0,
+        "consistent-return": 0,
+        "no-param-reassign": 0,
+        "no-unused-vars": "error",
+        "no-undef": "off",
+        "no-dupe-keys": "error",
+        "no-var": "error",
+        "comma-dangle": 0,
+        "class-methods-use-this": ["off"],
+        "curly": ["error", "multi-line"],
+        "import/no-unresolved": [2, { "commonjs": true }],
+        "import/extensions": [2, { "js": "never" }],
+        "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
+        "max-len": ["error", 100, 2, { "ignoreUrls": true }],
+        "no-console": "error",
+        "no-alert": "error",
+        "radix": "off",
+        "react/require-default-props": "off",
+        "react/forbid-prop-types": "off",
+        "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
+        "prefer-destructuring": "warn",
+        "react/no-find-dom-node": "off",
+        "react/no-did-mount-set-state": "off",
+        "react/no-unused-prop-types": "off",
+        "react/jsx-one-expression-per-line": "off",
+        "jsx-a11y/anchor-is-valid": ["error", { "components": ["Link"], "specialLink": ["to"] }],
+        "jsx-a11y/label-has-for": [2, {
+            "required": {
+                "every": ["id"]
+            }
+        }],
+        "prettier/prettier": ["error"]
+    }
+}
