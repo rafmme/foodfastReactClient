@@ -4,8 +4,23 @@
     "description": "this is an implement of the foodfast client [front-end] with the ReactJS library",
     "main": "index.js",
     "scripts": {
+        "start": "webpack-dev-server --config webpack.dev.js --open --hot",
+        "build": "webpack --config webpack.prod.js",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "prettier": "prettier -- write src/**/*.js"
+        "prettier": "prettier --write src/**/*.js",
+        "lint": "eslint --debug src/",
+        "lint-write": "eslint --debug src/ --fix"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.(js|jsx)": [
+            "npm run lint-write",
+            "git add"
+        ]
     },
     "repository": {
         "type": "git",
@@ -41,15 +56,21 @@
         "acorn": "^6.0.0",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^8.0.4",
+        "clean-webpack-plugin": "^1.0.0",
         "css-loader": "^2.0.0",
         "enzyme": "^3.7.0",
         "eslint": "^5.9.0",
         "eslint-config-airbnb": "^17.1.0",
+        "eslint-config-jest-enzyme": "^7.0.1",
         "eslint-config-prettier": "^3.3.0",
+        "eslint-plugin-babel": "^5.3.0",
         "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jest": "^22.1.2",
         "eslint-plugin-jsx-a11y": "^6.1.2",
         "eslint-plugin-prettier": "^3.0.0",
         "eslint-plugin-react": "^7.11.1",
+        "favicons-webpack-plugin": "0.0.9",
+        "file-loader": "^2.0.0",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^3.2.0",
         "husky": "^1.2.0",
@@ -58,8 +79,10 @@
         "prettier": "^1.15.3",
         "pretty-quick": "^1.8.0",
         "style-loader": "^0.23.1",
+        "terser-webpack-plugin": "^1.1.0",
         "webpack": "^4.27.1",
         "webpack-cli": "^3.1.2",
-        "webpack-dev-server": "^3.1.10"
+        "webpack-dev-server": "^3.1.10",
+        "webpack-merge": "^4.1.5"
     }
 }
