@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App';
 
 ReactDOM.render(
   <>
-    <h1 style={{ textAlign: 'center' }}>Yay!!! React now running</h1>
-    <h1 style={{ color: 'red', textAlign: 'center' }}>Yay!!! Webpack now configured</h1>
+    <App />
   </>,
   document.getElementById('root'),
 );
