@@ -1,0 +1,75 @@
+.name-avatar {
+    width: auto;
+    color: #019875 !important;
+    cursor: none;
+    font-size: 16px !important;
+    font-style: italic;
+}
+
+.name-avatar:hover {
+    background: none !important;
+}
+
+.initials-span {
+    background: darkgray !important;
+    color: #FFF;
+    border-radius: 70px;
+    height: 70px;
+    width: 70px;
+    padding: 15px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-right: -5px;
+    width: auto;
+}
+
+.tooltip .tooltiptext {
+    display: none;
+    width: auto;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 3px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    top: -25%;
+    left: -100%;
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 13px;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent; 
+}
+
+.tooltip:hover .tooltiptext {
+    display: block;
+    opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+.tooltip .tooltiptext {
+    width: auto;
+    top: -15%;
+    left: 70%;
+    right: -110%;
+    margin-right: auto;
+    margin-left: 0px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 13px;
+}
+}
