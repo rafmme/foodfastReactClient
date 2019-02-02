@@ -6,8 +6,8 @@
     "scripts": {
         "start:dev": "webpack-dev-server --config webpack.dev.js --open --hot",
         "build": "webpack --config webpack.prod.js",
-        "prestart": "npm run build",
-        "start": "babel-node server/app.js",
+        "postinstall": "npm run build",
+        "start": "node server/app.js",
         "test": "jest --u",
         "test:watch": "jest --watch",
         "test:coverage": "jest --u --coverage --colors && cat ./coverage/lcov.info | coveralls",
@@ -43,7 +43,6 @@
     },
     "homepage": "https://github.com/rafmme/foodfastReactClient#readme",
     "dependencies": {
-        "@babel/node": "^7.2.2",
         "@babel/runtime": "^7.2.0",
         "axios": "^0.18.0",
         "dotenv": "^6.2.0",
