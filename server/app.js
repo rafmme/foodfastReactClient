@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import express from 'express';
-import path from 'path';
-import env from 'dotenv';
+const express = require('express');
+const path = require('path');
 
-env.config();
+require('dotenv').config();
+
 const app = express();
 const PORT = Number.parseInt(process.env.PORT, 10) || 4040;
 

@@ -53,6 +53,17 @@ body {
     to { transform: rotate(360deg) }
 }
 
+.active:hover {
+    border-radius: none !important;
+}
+
+.active {
+    background: #d64541 !important;
+    color: #FFF !important;
+    border-radius: 50px;
+    padding: 15PX;
+}
+
 .alert {
     background: #e74c3c !important;
     padding: 5px 10px 5px 10px;
@@ -616,7 +627,7 @@ img {
 }
 
 .showcase {
-    /* background: url('../images/burrito-chicken-close-up-461198.jpg'); */
+    background: url('../images//heroImage.jpg');
     width: 100%;
     height: 350px;
     background-position-y: center;
@@ -643,15 +654,15 @@ img {
 
 .input-group button {
     width: 50px;
-    height: 40px;
+    height: 35px;
     border-radius: 2px;
     outline: none;
-    margin-left: -53px;
+    margin-left: -50px;
     background: #34495e;
     color: #fff;
 }
 
-header .topnav span {
+.topnav-span {
     display: block;
     width: 20px;
     height: 1.5px;
@@ -692,7 +703,8 @@ header .topnav span {
   .topnav .lnk a:hover {
     color: #FFF;
     background: #019875;
-    border-radius: 0px 20px 0px 20px;
+    border-radius: 50px;
+    padding: 15px;
    }
 
   .topnav .icon {
@@ -1314,7 +1326,7 @@ header .topnav span {
 
     .showcase {
         width: 100%;
-        /* background: url('../images/burrito-chicken-close-up-461198.jpg'); */
+        background: url('../images//heroImage.jpg');
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -1336,11 +1348,8 @@ header .topnav span {
     }
 
     .input-group button {
-        width: 53px;
-        height: 40px;
         border-radius: 2px;
         outline: none;
-        margin-left: -55px;
         background: #34495e;
         color: #fff;
     }
