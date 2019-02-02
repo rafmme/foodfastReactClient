@@ -4,12 +4,8 @@ import App from '../src/App';
 
 const wrapper = shallow(<App />);
 
-describe('Test App component <App />', () => {
-  it('should have a div tag', () => {
-    expect(wrapper.find('div').exists()).toBe(true);
+describe('<App />', () => {
+  it('should render successfully', () => {
     expect(wrapper).toMatchSnapshot();
-  });
-  it('should have a h1 tag', () => {
-    expect(wrapper.find('h1').exists()).toBe(true);
   });
 });
