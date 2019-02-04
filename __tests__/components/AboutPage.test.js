@@ -5,7 +5,7 @@ import Contact from '../../src/components/views/Contact/Contact';
 import Testimonial from '../../src/components/views/Showcase/Testimonial';
 import Work from '../../src/components/views/Showcase/Work';
 import Showcase from '../../src/components/views/Showcase/Showcase';
-import NavBar from '../../src/components/views/NavBar/NavBar';
+import NavigationBar from '../../src/components/views/NavBar/NavBar';
 import Footer from '../../src/components/views/Footer/Footer';
 import AboutNavLink from '../../src/components/views/NavBar/AboutNavLink/AboutNavLink';
 import Services from '../../src/components/views/Showcase/Service';
@@ -32,9 +32,9 @@ describe('<AboutPage />', () => {
       wrapper.containsMatchingElement(
         <>
           <div className="wrapper">
-            <NavBar>
+            <NavigationBar>
               <AboutNavLink />
-            </NavBar>
+            </NavigationBar>
             <Showcase>
               <Description history={{}} />
             </Showcase>

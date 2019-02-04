@@ -3,7 +3,7 @@ import Contact from '../Contact/Contact';
 import Testimonial from '../Showcase/Testimonial';
 import Work from '../Showcase/Work';
 import Showcase from '../Showcase/Showcase';
-import NavBar from '../NavBar/NavBar';
+import NavigationBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import AboutNavLink from '../NavBar/AboutNavLink/AboutNavLink';
 import Services from '../Showcase/Service';
@@ -12,9 +12,9 @@ import Description from '../Showcase/Description';
 export default ({ history }) => (
   <>
     <div className="wrapper">
-      <NavBar>
+      <NavigationBar>
         <AboutNavLink />
-      </NavBar>
+      </NavigationBar>
       <Showcase>
         <Description history={history} />
       </Showcase>
