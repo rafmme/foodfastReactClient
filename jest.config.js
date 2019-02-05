@@ -6,6 +6,7 @@ module.exports = {
     '!src/index.js',
     '!src/store/index.js',
     '!src/reducers/index.js',
+    '!src/helpers/axios.config.js',
   ],
   coverageDirectory: 'coverage',
   moduleFileExtensions: ['js', 'json', 'jsx'],
