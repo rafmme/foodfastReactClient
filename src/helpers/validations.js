@@ -27,6 +27,27 @@ const validateLoginInput = ({ email, password }) => {
   return errors;
 };
 
+/**
+ * @description a function to validate sign up data
+ * @param {object} signUpData
+ * @returns {object} an objects containing the error messages
+ */
+const validateSignUpInput = ({ email, password, fullname }) => {
+  const errors = validateLoginInput({ email, password });
+  const fullNamePattern = /[`~/\\±§_+\-=!@#$%^&*(),.?":{}|<>0-9]/g;
+
+  if (fullname.trim() === '') {
+    errors.fullname = 'Fullname cannot be empty';
+  }
+  if (fullname.trim() !== '' && fullname.length < 2) {
+    errors.fullname = 'Fullname is too short';
+  }
+  if (fullname.length >= 2 && fullname.match(fullNamePattern)) {
+    errors.fullname = 'Fullname cannot contain special characters or numbers';
+  }
+  return errors;
+};
+
 const extractErrorMessages = arrayOfMessages => {
   let text = '';
   arrayOfMessages.forEach(message => {
@@ -35,4 +56,4 @@ const extractErrorMessages = arrayOfMessages => {
   return text;
 };
 
-export { validateLoginInput, extractErrorMessages };
+export { validateLoginInput, extractErrorMessages, validateSignUpInput };

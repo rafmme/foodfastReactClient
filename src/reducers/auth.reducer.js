@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   isLoading: false,
   hasLoginError: false,
   loginError: null,
+  hasSignUpError: false,
+  signUpError: null,
   currentUser: null,
 };
 
@@ -25,6 +27,21 @@ export default (state = INITIAL_STATE, action) => {
         ...action.payload,
       };
     case types.LOGIN_USER_ERROR:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case types.SIGN_UP_USER:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case types.SIGN_UP_USER_ERROR:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case types.SIGN_UP_USER_SUCCESS:
       return {
         ...state,
         ...action.payload,

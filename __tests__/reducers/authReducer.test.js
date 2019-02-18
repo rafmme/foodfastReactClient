@@ -4,6 +4,8 @@ import types from '../../src/constant/actionTypes';
 const initialState = {
   isLoading: false,
   hasLoginError: false,
+  hasSignUpError: false,
+  signUpError: null,
   loginError: null,
   currentUser: null,
 };
@@ -49,6 +51,56 @@ describe('Login Auth Reducer', () => {
     expect(
       authReducer(initialState, {
         type: types.LOGIN_USER_SUCCESS,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+});
+
+describe('Sign Up Auth Reducer', () => {
+  it('returns the initial state', () => {
+    expect(authReducer(undefined, {})).toEqual(initialState);
+  });
+
+  it('handles start sign up request', () => {
+    expect(
+      authReducer(initialState, {
+        type: types.SIGN_UP_USER,
+        payload: {
+          isLoading: true,
+        },
+      }),
+    ).toEqual({
+      ...initialState,
+      isLoading: true,
+    });
+  });
+
+  it('handles sign up failure', () => {
+    const payload = {
+      isLoading: false,
+      hasSignUpError: true,
+      signUpError: 'Network error',
+    };
+
+    expect(authReducer(initialState, { type: types.SIGN_UP_USER_ERROR, payload })).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('handles sign up successful', () => {
+    const payload = {
+      isLoading: false,
+      hasSignUpError: false,
+    };
+
+    expect(
+      authReducer(initialState, {
+        type: types.SIGN_UP_USER_SUCCESS,
         payload,
       }),
     ).toEqual({

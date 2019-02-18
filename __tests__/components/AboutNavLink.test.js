@@ -20,12 +20,14 @@ describe('<AboutNavLink/>', () => {
           <Link to="/about#contact">
             <i className="fa fa-envelope" /> Contact Us
           </Link>
-          <Link id="login-link" to="login">
-            <i className="fa fa-sign-in" /> Login
-          </Link>
-          <Link id="signup-link" to="signup">
-            <i className="fa fa-user-plus" /> Sign Up
-          </Link>
+          <>
+            <Link id="login-link" to="login">
+              <i className="fa fa-sign-in" /> Login
+            </Link>
+            <Link id="signup-link" to="signup">
+              <i className="fa fa-user-plus" /> Sign Up
+            </Link>
+          </>
         </>,
       ),
     ).toBeTruthy();

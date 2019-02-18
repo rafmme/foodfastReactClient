@@ -1,4 +1,8 @@
-import { extractErrorMessages, validateLoginInput } from '../../src/helpers/validations';
+import {
+  extractErrorMessages,
+  validateLoginInput,
+  validateSignUpInput,
+} from '../../src/helpers/validations';
 
 const emptyInput = {
   password: '',
@@ -21,6 +25,18 @@ describe('Login Input Validation Test', () => {
 
   it('should give error for invalid string input', () => {
     expect(Object.keys(validateLoginInput({})).length).toEqual(2);
+  });
+});
+
+describe('Sign Up Input Validation Test', () => {
+  it('should give error for short fullname input', () => {
+    shortInput.fullname = 'T';
+    expect(Object.keys(validateSignUpInput(shortInput)).length).toEqual(3);
+  });
+
+  it('should give error for invalid fullname input', () => {
+    shortInput.fullname = 'Asf5778@';
+    expect(Object.keys(validateSignUpInput(shortInput)).length).toEqual(3);
   });
 });
 

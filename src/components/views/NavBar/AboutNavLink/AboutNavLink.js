@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import AuthHelper from '../../../../helpers/AuthHelper';
 
 const AboutNavLink = () => (
   <>
@@ -9,12 +10,16 @@ const AboutNavLink = () => (
     <Link to="/about#contact">
       <i className="fa fa-envelope" /> Contact Us
     </Link>
-    <Link id="login-link" to="login">
-      <i className="fa fa-sign-in" /> Login
-    </Link>
-    <Link id="signup-link" to="signup">
-      <i className="fa fa-user-plus" /> Sign Up
-    </Link>
+    {!AuthHelper.checkUserIsAuthenticated(localStorage.userAuthToken) && (
+      <>
+        <Link id="login-link" to="login">
+          <i className="fa fa-sign-in" /> Login
+        </Link>
+        <Link id="signup-link" to="signup">
+          <i className="fa fa-user-plus" /> Sign Up
+        </Link>
+      </>
+    )}
   </>
 );
 

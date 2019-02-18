@@ -32,6 +32,36 @@ const loginSuccessful = userEmail => ({
   },
 });
 
+const startSignUp = () => ({
+  type: types.SIGN_UP_USER,
+  payload: {
+    isLoading: true,
+    hasSignUpError: false,
+    signUpError: null,
+    currentUser: null,
+  },
+});
+
+const signUpFailure = error => ({
+  type: types.SIGN_UP_USER_ERROR,
+  payload: {
+    isLoading: false,
+    hasSignUpError: true,
+    signUpError: error.message,
+    currentUser: null,
+  },
+});
+
+const signUpSuccessful = userEmail => ({
+  type: types.SIGN_UP_USER_SUCCESS,
+  payload: {
+    isLoading: false,
+    hasSignUpError: false,
+    signUpError: null,
+    currentUser: userEmail,
+  },
+});
+
 const AuthAction = {
   loginUser: (userLoginData, history) => async dispatch => {
     dispatch(startLogin());
@@ -56,6 +86,32 @@ const AuthAction = {
       dispatch(loginFailure(error));
     }
   },
+  signUpUser: (userSignUpData, history) => async dispatch => {
+    dispatch(startSignUp());
+    try {
+      const res = await makeAPIRequest('/auth/signup', { method: 'POST', body: userSignUpData });
+      localStorage.setItem('userAuthToken', res.token);
+      dispatch(signUpSuccessful(userSignUpData.email));
+      history.push('/');
+    } catch (error) {
+      const errorObject = JSON.parse(JSON.stringify(error));
+      const { response } = errorObject;
+
+      if (response) {
+        dispatch(signUpFailure(response.data.error));
+        return;
+      }
+      dispatch(signUpFailure(error));
+    }
+  },
 };
 
-export { AuthAction, startLogin, loginFailure, loginSuccessful };
+export {
+  AuthAction,
+  startLogin,
+  loginFailure,
+  loginSuccessful,
+  startSignUp,
+  signUpFailure,
+  signUpSuccessful,
+};
