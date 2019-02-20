@@ -1,6 +1,8 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AuthHelper from '../../../helpers/AuthHelper';
 
 export class NavBar extends Component {
   constructor(props) {
@@ -25,7 +27,17 @@ export class NavBar extends Component {
     return (
       <header id="header">
         <nav className={`topnav${isToggled ? ' responsive' : ''}`} id="myTopnav">
-          <Link to="null" id="brand">
+          <Link
+            to={
+              AuthHelper.checkUserIsAuthenticated(localStorage.userAuthToken) &&
+              AuthHelper.checkUserIsAdmin(localStorage.userAuthToken)
+                ? '/admin'
+                : AuthHelper.checkUserIsAuthenticated(localStorage.userAuthToken)
+                ? '/'
+                : '/about'
+            }
+            id="brand"
+          >
             FoodFast
           </Link>
           <div id="rule" />

@@ -9,6 +9,9 @@ import {
   startLogin,
   loginFailure,
   loginSuccessful,
+  startSignUp,
+  signUpSuccessful,
+  signUpFailure,
 } from '../../src/actions/auth.action';
 
 const mock = new MockAdapter(axiosInstance);
@@ -19,6 +22,130 @@ const adminToken =
 
 const userToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkOTZmZDg4MS0yMDk2LTQ2ZjItODhkOC0xM2M5MjVlYmJjODciLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTUwNDE3OTUwLCJleHAiOjE1NTA0NjExNTB9.zIqCfV4Ht-tRGM14aMGVn-aXObcYy0W-ehoGx3YLJKM';
+
+describe('Sign Up async actions', () => {
+  it('creates SIGN_UP_USER_ERROR when user sign up fails due to bad input', done => {
+    mock.onPost('/auth/signup', { email: '', password: '', fullname: '' }).reply(400, {
+      success: false,
+      status: 400,
+      error: {
+        message: 'Sign Up failed! credentials not correct',
+      },
+    });
+
+    const expectedActions = [
+      {
+        type: 'SIGN_UP_USER',
+        payload: { isLoading: true, hasSignUpError: false, signUpError: null, currentUser: null },
+      },
+      {
+        type: 'SIGN_UP_USER_ERROR',
+        payload: {
+          isLoading: false,
+          hasSignUpError: true,
+          signUpError: 'Sign Up failed! credentials not correct',
+          currentUser: null,
+        },
+      },
+    ];
+
+    const store = mockStore({ auth: [] });
+
+    return store
+      .dispatch(
+        AuthAction.signUpUser({ email: '', password: '', fullname: '' }, { push: jest.fn() }),
+      )
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+  });
+
+  it('creates SIGN_UP_USER_ERROR when user sign up fails due to network error', done => {
+    mock.onPost('/auth/signup', {}).networkError();
+
+    const expectedActions = [
+      {
+        type: 'SIGN_UP_USER',
+        payload: { isLoading: true, hasSignUpError: false, signUpError: null, currentUser: null },
+      },
+      {
+        type: 'SIGN_UP_USER_ERROR',
+        payload: {
+          isLoading: false,
+          hasSignUpError: true,
+          signUpError: 'Network Error',
+          currentUser: null,
+        },
+      },
+    ];
+
+    const store = mockStore({ auth: [] });
+
+    return store.dispatch(AuthAction.signUpUser({}, { push: jest.fn() })).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
+
+  it('creates SIGN_UP_USER_SUCCESS when user sign up is successful', done => {
+    const history = {
+      push(str) {
+        expect(str).toEqual('/');
+      },
+    };
+
+    mock
+      .onPost('/auth/signup', {
+        email: 'timmy@gmail.com',
+        password: 'helloworld',
+      })
+      .reply(201, {
+        success: true,
+        status: 201,
+        message: 'User sign-up was successful',
+        token: userToken,
+      });
+
+    const expectedActions = [
+      {
+        type: types.SIGN_UP_USER,
+        payload: {
+          isLoading: true,
+          hasSignUpError: false,
+          signUpError: null,
+          currentUser: null,
+        },
+      },
+      {
+        type: types.SIGN_UP_USER_SUCCESS,
+        payload: {
+          isLoading: false,
+          hasSignUpError: false,
+          signUpError: null,
+          currentUser: 'timmy@gmail.com',
+        },
+      },
+    ];
+
+    const store = mockStore({ auth: [] });
+
+    return store
+      .dispatch(
+        AuthAction.signUpUser(
+          {
+            email: 'timmy@gmail.com',
+            password: 'helloworld',
+          },
+          history,
+        ),
+      )
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+  });
+});
 
 describe('Auth async actions', () => {
   it('creates LOGIN_USER_ERROR when user login fails due bad input', done => {
@@ -238,5 +365,46 @@ describe('Login Action test', () => {
       },
     };
     expect(expectedAction).toEqual(loginFailure({ message: 'Network error' }));
+  });
+});
+
+describe('Sign Up Action test', () => {
+  it('has an action that dispatches when sign up has started', () => {
+    const expectedAction = {
+      type: types.SIGN_UP_USER,
+      payload: {
+        isLoading: true,
+        signUpError: null,
+        hasSignUpError: false,
+        currentUser: null,
+      },
+    };
+    expect(expectedAction).toEqual(startSignUp());
+  });
+
+  it('has an action that dispatches when sign up is successful', () => {
+    const expectedAction = {
+      type: types.SIGN_UP_USER_SUCCESS,
+      payload: {
+        isLoading: false,
+        hasSignUpError: false,
+        signUpError: null,
+        currentUser: 'rafmme@world.com',
+      },
+    };
+    expect(expectedAction).toEqual(signUpSuccessful('rafmme@world.com'));
+  });
+
+  it('has an action that dispatches when sign up fails', () => {
+    const expectedAction = {
+      type: types.SIGN_UP_USER_ERROR,
+      payload: {
+        isLoading: false,
+        hasSignUpError: true,
+        signUpError: 'Network error',
+        currentUser: null,
+      },
+    };
+    expect(expectedAction).toEqual(signUpFailure({ message: 'Network error' }));
   });
 });
