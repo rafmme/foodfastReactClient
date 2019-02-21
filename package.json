@@ -10,7 +10,7 @@
         "start": "node server/app.js",
         "test": "jest -u",
         "test:watch": "jest -u --watch",
-        "test:coverage": "jest --coverage --colors && cat ./coverage/lcov.info | coveralls",
+        "test:coverage": "jest --coverage --colors -u && cat ./coverage/lcov.info | coveralls",
         "prettier": "prettier --write src/**/*.js",
         "lint": "eslint --debug src/",
         "lint-write": "eslint --debug src/ --fix"
