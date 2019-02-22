@@ -1,0 +1,12 @@
+.network-error-div {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .network-error-div {
+    width: 80%;
+  }
+}

@@ -7,6 +7,9 @@ const actionTypes = keyMirror({
   SIGN_UP_USER: null,
   SIGN_UP_USER_SUCCESS: null,
   SIGN_UP_USER_ERROR: null,
+  FETCH_MENU: null,
+  FETCH_MENU_SUCCESS: null,
+  FETCH_MENU_ERROR: null,
 });
 
 export default actionTypes;
