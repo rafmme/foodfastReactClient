@@ -109,3 +109,21 @@ describe('Sign Up Auth Reducer', () => {
     });
   });
 });
+
+describe('Log Out Auth Reducer', () => {
+  it('updates the state when user log out', () => {
+    const payload = {
+      currentUser: null,
+    };
+
+    expect(
+      authReducer(initialState, {
+        type: types.LOG_OUT_USER,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+});
