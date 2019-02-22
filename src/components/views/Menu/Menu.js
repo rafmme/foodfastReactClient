@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import UserNavLink from '../NavBar/UserNavLink/UserNavLink';
+import UserNavigationLink from '../NavBar/UserNavLink/UserNavLink';
 import NavigationBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import ShowCase from '../Showcase/Showcase';
@@ -27,7 +27,7 @@ export class Menu extends Component {
         <Spinner isLoading={isLoading} />
         <div className="wrapper">
           <NavigationBar>
-            <UserNavLink />
+            <UserNavigationLink />
           </NavigationBar>
           <ShowCase>
             <HeroSearchBox />

@@ -1,24 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NavLink } from 'react-router-dom';
-import UserNavLink from '../../src/components/views/NavBar/UserNavLink/UserNavLink';
+import { UserNavLink } from '../../src/components/views/NavBar/UserNavLink/UserNavLink';
 
-const wrap = shallow(<UserNavLink />);
+const logoutUser = jest.fn();
+const preventDefault = jest.fn();
+const wrap = shallow(<UserNavLink logoutUser={logoutUser} />);
 
 describe('<UserNavLink/>', () => {
   it('should render successfully', () => {
     expect(wrap).toMatchSnapshot();
   });
 
-  it('should render the correct elements', () => {
-    expect(
-      wrap.containsMatchingElement(
-        <>
-          <NavLink to="/" activeClassName="active">
-            <i className="fa fa-list" /> Menu
-          </NavLink>
-        </>,
-      ),
-    ).toBeTruthy();
+  it('should simulate logout link click', () => {
+    wrap.find('#log-out').simulate('click', { preventDefault });
+    expect(preventDefault.mock.calls.length).toEqual(1);
+    expect(logoutUser.mock.calls.length).toEqual(1);
   });
 });

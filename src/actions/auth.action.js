@@ -104,6 +104,16 @@ const AuthAction = {
       dispatch(signUpFailure(error));
     }
   },
+  logoutUser: history => async dispatch => {
+    localStorage.removeItem('userAuthToken');
+    dispatch({
+      type: types.LOG_OUT_USER,
+      payload: {
+        currentUser: null,
+      },
+    });
+    history.push('/about');
+  },
 };
 
 export {

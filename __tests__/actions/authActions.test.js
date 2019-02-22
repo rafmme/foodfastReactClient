@@ -268,6 +268,30 @@ describe('Auth async actions', () => {
       });
   });
 
+  it('should dispatch log out action', done => {
+    const history = {
+      push(str) {
+        expect(str).toEqual('/about');
+      },
+    };
+
+    const expectedActions = [
+      {
+        type: types.LOG_OUT_USER,
+        payload: {
+          currentUser: null,
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(AuthAction.logoutUser(history)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
+
   it('creates LOGIN_USER_SUCCESS when ordinary user login is successful', done => {
     const history = {
       push(str) {
