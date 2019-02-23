@@ -10,6 +10,8 @@ import Spinner from '../Spinner/Spinner';
 import MenuData from '../../containers/Meal/MealData';
 import MealList from './MealList';
 import NetworkError from '../Showcase/FetchErrorMessage';
+import Modal from '../Modal/Modal';
+import MealOrderForm from '../OrderForm/OrderForm';
 
 export class Menu extends Component {
   constructor(props) {
@@ -18,7 +20,7 @@ export class Menu extends Component {
   }
 
   render() {
-    const { isLoading, fetchMenuError, hasError } = this.props;
+    const { isLoading, fetchMenuError, hasError, isOpened } = this.props;
     if (hasError) {
       return <NetworkError hasError={hasError} errorMessage={fetchMenuError} />;
     }
@@ -38,6 +40,9 @@ export class Menu extends Component {
             )}
           />
         </div>
+        <Modal isOpened={isOpened}>
+          <MealOrderForm />
+        </Modal>
         <Footer />
       </>
     );
@@ -48,12 +53,14 @@ const mapStateToProps = state => ({
   isLoading: state.menu.isLoading,
   hasError: state.menu.hasError,
   fetchMenuError: state.menu.fetchMenuError,
+  isOpened: state.modal.isOpened,
 });
 
 Menu.propTypes = {
   isLoading: PropTypes.bool,
   hasError: PropTypes.bool,
   fetchMenuError: PropTypes.object,
+  isOpened: PropTypes.bool,
 };
 
 export default connect(

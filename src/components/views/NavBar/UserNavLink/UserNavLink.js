@@ -27,7 +27,7 @@ const mapDispatchToProps = {
 };
 
 UserNavLink.propTypes = {
-  history: PropTypes.func,
+  history: PropTypes.object,
   logoutUser: PropTypes.func,
 };
 

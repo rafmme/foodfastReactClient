@@ -11,6 +11,13 @@ const actionTypes = keyMirror({
   FETCH_MENU: null,
   FETCH_MENU_SUCCESS: null,
   FETCH_MENU_ERROR: null,
+  SHOW_MODAL: null,
+  HIDE_MODAL: null,
+  PLACE_ORDER: null,
+  PLACE_ORDER_SUCCESS: null,
+  PLACE_ORDER_ERROR: null,
+  FETCH_MEAL: null,
+  HIDE_ORDER_MESSAGE: null,
 });
 
 export default actionTypes;
