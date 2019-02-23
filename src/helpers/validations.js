@@ -48,6 +48,36 @@ const validateSignUpInput = ({ email, password, fullname }) => {
   return errors;
 };
 
+/**
+ * @description a function to validate order data
+ * @param {String} quantity
+ * @param {String} phoneNumber
+ * @param {address} address
+ * @returns {Object} an objects containing the error messages
+ */
+const validateOrderInput = ({ quantity, phoneNumber, deliveryAddress }) => {
+  const errors = {};
+  if (phoneNumber.trim() === '') {
+    errors.phoneNumber = "Phone Number field can't be empty";
+  }
+  if (phoneNumber.trim() !== '' && phoneNumber.length !== 11) {
+    errors.phoneNumber = 'Phone Number should be of 11 characters';
+  }
+  if (deliveryAddress.trim() === '') {
+    errors.address = "Delivery Address field can't be empty";
+  }
+  if (deliveryAddress.trim() !== '' && deliveryAddress.length < 3) {
+    errors.address = 'Delivery Address field is empty';
+  }
+  if (!Number.isSafeInteger(quantity)) {
+    errors.quantity = 'Quantity of food to order should be a number';
+  }
+  if (`${quantity}`[0] === '-' || quantity < 1) {
+    errors.quantity = 'Quantity of food to order is invalid';
+  }
+  return errors;
+};
+
 const extractErrorMessages = arrayOfMessages => {
   let text = '';
   arrayOfMessages.forEach(message => {
@@ -56,4 +86,4 @@ const extractErrorMessages = arrayOfMessages => {
   return text;
 };
 
-export { validateLoginInput, extractErrorMessages, validateSignUpInput };
+export { validateLoginInput, extractErrorMessages, validateSignUpInput, validateOrderInput };

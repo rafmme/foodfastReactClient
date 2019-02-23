@@ -1,38 +1,31 @@
-import actionTypes from '../constant/actionTypes';
-
-const { FETCH_MENU, FETCH_MENU_SUCCESS, FETCH_MENU_ERROR, FETCH_MEAL } = actionTypes;
+import types from '../constant/actionTypes';
 
 const initialState = {
   isLoading: false,
   hasError: false,
-  fetchMenuError: null,
-  menu: [],
-  meal: {},
+  orderError: null,
+  orderComplete: false,
+  message: null,
 };
 
-/**
- * @param {Object} state - Default application state
- * @param {Object} action - Action from action creator
- * @returns {Object} New state
- */
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_MENU:
+    case types.PLACE_ORDER:
       return {
         ...state,
         ...action.payload,
       };
-    case FETCH_MENU_SUCCESS:
+    case types.PLACE_ORDER_SUCCESS:
       return {
         ...state,
         ...action.payload,
       };
-    case FETCH_MENU_ERROR:
+    case types.PLACE_ORDER_ERROR:
       return {
         ...state,
         ...action.payload,
       };
-    case FETCH_MEAL:
+    case types.HIDE_ORDER_MESSAGE:
       return {
         ...state,
         ...action.payload,

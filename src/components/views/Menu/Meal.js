@@ -1,8 +1,11 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
 import AuthHelper from '../../../helpers/AuthHelper';
+import ModalAction from '../../../actions/modal.action';
+import MenuAction from '../../../actions/menu.action';
 
-const Meal = ({ meal }) => {
+export const Meal = ({ meal, showModal, fetchMeal }) => {
   const { id, imageUrl, title, description, price } = meal;
   return (
     <div key={id} className="meal-card m-card">
@@ -17,7 +20,16 @@ const Meal = ({ meal }) => {
         </p>
         {AuthHelper.checkUserIsAuthenticated(localStorage.userAuthToken) &&
         !AuthHelper.checkUserIsAdmin(localStorage.userAuthToken) ? (
-          <button type="button" className="bg-green">
+          <button
+            type="button"
+            id="order-btn"
+            className="bg-green"
+            onClick={evt => {
+              evt.preventDefault();
+              fetchMeal(meal);
+              showModal();
+            }}
+          >
             Order
           </button>
         ) : null}
@@ -28,6 +40,16 @@ const Meal = ({ meal }) => {
 
 Meal.propTypes = {
   meal: PropTypes.object.isRequired,
+  showModal: PropTypes.func,
+  fetchMeal: PropTypes.func,
 };
 
-export default Meal;
+const mapDispatchToProps = {
+  showModal: ModalAction.showModal,
+  fetchMeal: MenuAction.fetchMeal,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Meal);

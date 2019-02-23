@@ -1,7 +1,7 @@
 import types from '../constant/actionTypes';
 import { makeAPIRequest } from '../helpers/axios.config';
 
-const { FETCH_MENU, FETCH_MENU_SUCCESS, FETCH_MENU_ERROR } = types;
+const { FETCH_MENU, FETCH_MENU_SUCCESS, FETCH_MENU_ERROR, FETCH_MEAL } = types;
 
 const MenuAction = {
   fetchMenu: () => async dispatch => {
@@ -32,6 +32,14 @@ const MenuAction = {
         },
       });
     }
+  },
+  fetchMeal: meal => async dispatch => {
+    dispatch({
+      type: FETCH_MEAL,
+      payload: {
+        meal,
+      },
+    });
   },
 };
 

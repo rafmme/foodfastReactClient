@@ -1,11 +1,13 @@
 import menuReducer from '../../src/reducers/menu.reducer';
 import types from '../../src/constant/actionTypes';
+import mockMenu from '../../__mocks__/mockMenu';
 
 const initialState = {
   isLoading: false,
   hasError: false,
   fetchMenuError: null,
   menu: [],
+  meal: {},
 };
 
 describe('Menu Reducer', () => {
@@ -51,6 +53,22 @@ describe('Menu Reducer', () => {
     expect(
       menuReducer(initialState, {
         type: types.FETCH_MENU_SUCCESS,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('handles fetch a meal', () => {
+    const payload = {
+      meal: mockMenu[0],
+    };
+
+    expect(
+      menuReducer(initialState, {
+        type: types.FETCH_MEAL,
         payload,
       }),
     ).toEqual({

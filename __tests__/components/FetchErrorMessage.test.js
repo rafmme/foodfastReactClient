@@ -8,4 +8,13 @@ describe('<FetchErrorMessage />', () => {
   it('should render successfully', () => {
     expect(wrap).toMatchSnapshot();
   });
+
+  it('should check the current style if hasError is true', () => {
+    expect(wrap.get(0).props.style.display).toEqual('block');
+  });
+
+  it('should check the current style if hasError is false', () => {
+    wrap.setProps({ hasError: false });
+    expect(wrap.get(0).props.style.display).toEqual('none');
+  });
 });

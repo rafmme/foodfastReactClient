@@ -70,4 +70,22 @@ describe('Fetch Menu async actions', () => {
       done();
     });
   });
+
+  it('dispatch FETCH_MEAL action when fetching a particular meal', done => {
+    const expectedActions = [
+      {
+        type: types.FETCH_MEAL,
+        payload: {
+          meal: mockMenu[0],
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(MenuAction.fetchMeal(mockMenu[0])).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
 });
