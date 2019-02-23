@@ -4,6 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { axiosInstance } from '../../src/helpers/axios.config';
 import types from '../../src/constant/actionTypes';
 import OrderAction from '../../src/actions/order.action';
+import mockOrders from '../../__mocks__/mockOrders';
 
 const mock = new MockAdapter(axiosInstance);
 const middlewares = [thunk];
@@ -155,6 +156,118 @@ describe('OrderAction Test', () => {
       expect(store.getActions()).toEqual(expectedActions);
       expect(history.mock.calls.length).toEqual(0);
       expect(hideModal.mock.calls.length).toEqual(0);
+      done();
+    });
+  });
+
+  it('dispatches the GET_USER_ORDERS_SUCCESS action when the user orders was fetched', done => {
+    mock.onGet('/users/rafmme/orders/', {}).reply(200, {
+      success: true,
+      status: 200,
+      message: 'All User Orders fetched successfully',
+      orders: mockOrders,
+    });
+
+    const expectedActions = [
+      {
+        type: types.GET_USER_ORDERS,
+        payload: {
+          isLoading: true,
+          hasError: false,
+          fetchOrdersError: null,
+          orders: [],
+          processedOrders: [],
+          completedOrders: [],
+          newOrders: [],
+        },
+      },
+      {
+        type: types.GET_USER_ORDERS_SUCCESS,
+        payload: {
+          isLoading: false,
+          hasError: false,
+          orders: mockOrders,
+          newOrders: mockOrders.filter(order => order.status === 'New'),
+          completedOrders: mockOrders.filter(order => order.status === 'Complete'),
+          processedOrders: mockOrders.filter(order => order.status === 'Processing'),
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(OrderAction.getUserOrders('rafmme')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
+
+  it('dispatches the GET_USER_ORDERS_ERROR action when the fetching user orders failed', done => {
+    mock.onGet('/users/rafmme/orders/', {}).networkError();
+
+    const expectedActions = [
+      {
+        type: types.GET_USER_ORDERS,
+        payload: {
+          isLoading: true,
+          hasError: false,
+          fetchOrdersError: null,
+          orders: [],
+          processedOrders: [],
+          completedOrders: [],
+          newOrders: [],
+        },
+      },
+      {
+        type: types.GET_USER_ORDERS_ERROR,
+        payload: {
+          isLoading: false,
+          hasError: true,
+          fetchOrdersError: { message: "Couldn't fetch your order history" },
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(OrderAction.getUserOrders('rafmme')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
+
+  it('dispatches the REMOVE_ORDER action when removing the order object from store', done => {
+    const expectedActions = [
+      {
+        type: types.REMOVE_ORDER,
+        payload: {
+          order: null,
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(OrderAction.removeOrder()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
+
+  it('dispatches the FETCH_ORDER action when adding the order object to the store', done => {
+    const expectedActions = [
+      {
+        type: types.FETCH_ORDER,
+        payload: {
+          order: mockOrders[1],
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(OrderAction.fetchOrder(mockOrders[1])).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
       done();
     });
   });

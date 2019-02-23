@@ -4,6 +4,12 @@ import types from '../../src/constant/actionTypes';
 const initialState = {
   isLoading: false,
   hasError: false,
+  fetchOrdersError: null,
+  orders: [],
+  processedOrders: [],
+  completedOrders: [],
+  newOrders: [],
+  order: null,
   orderError: null,
   orderComplete: false,
   message: null,
@@ -66,12 +72,78 @@ describe('Order Reducer', () => {
     });
   });
 
+  it('update the state for FETCH_ORDER action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.FETCH_ORDER,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for REMOVE_ORDER action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.REMOVE_ORDER,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for GET_USER_ORDERS action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.GET_USER_ORDERS,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for GET_USER_ORDERS_SUCCESS action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.GET_USER_ORDERS_SUCCESS,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for GET_USER_ORDERS_ERROR action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.GET_USER_ORDERS_ERROR,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
   it('update the state for HIDE_ORDER_MESSAGE action', () => {
-    const payload = {
-      hasError: false,
-      orderComplete: false,
-      orderError: null,
-    };
+    const payload = {};
 
     expect(
       orderReducer(initialState, {

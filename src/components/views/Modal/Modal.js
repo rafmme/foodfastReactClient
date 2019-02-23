@@ -12,7 +12,7 @@ const Modal = props => {
 
 Modal.propTypes = {
   isOpened: PropTypes.bool,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object,
 };
 
 export default Modal;
