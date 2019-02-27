@@ -1,6 +1,6 @@
 import actionTypes from '../constant/actionTypes';
 
-const { FETCH_MENU, FETCH_MENU_SUCCESS, FETCH_MENU_ERROR, FETCH_MEAL } = actionTypes;
+const { FETCH_MENU, FETCH_MENU_SUCCESS, FETCH_MENU_ERROR, FETCH_MEAL, REMOVE_MEAL } = actionTypes;
 
 const initialState = {
   isLoading: false,
@@ -33,6 +33,11 @@ export default (state = initialState, action) => {
         ...action.payload,
       };
     case FETCH_MEAL:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case REMOVE_MEAL:
       return {
         ...state,
         ...action.payload,

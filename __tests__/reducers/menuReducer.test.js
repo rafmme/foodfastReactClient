@@ -76,4 +76,18 @@ describe('Menu Reducer', () => {
       ...payload,
     });
   });
+
+  it('update the state for REMOVE_MEAL action', () => {
+    const payload = {};
+
+    expect(
+      menuReducer(initialState, {
+        type: types.REMOVE_MEAL,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
 });

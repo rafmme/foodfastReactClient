@@ -23,6 +23,7 @@ const actionTypes = keyMirror({
   GET_USER_ORDERS_SUCCESS: null,
   GET_USER_ORDERS_ERROR: null,
   REMOVE_ORDER: null,
+  REMOVE_MEAL: null,
 });
 
 export default actionTypes;

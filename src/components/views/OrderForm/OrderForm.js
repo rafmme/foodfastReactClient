@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import ModalAction from '../../../actions/modal.action';
 import OrderAction from '../../../actions/order.action';
 import { validateOrderInput, extractErrorMessages } from '../../../helpers/validations';
+import MenuAction from '../../../actions/menu.action';
 
 export class OrderForm extends Component {
   constructor(props) {
@@ -80,6 +81,7 @@ export class OrderForm extends Component {
       orderComplete,
       message,
       orderError,
+      removeMeal,
     } = this.props;
     const { inputFieldsData, validationErrors, hasValidationError } = this.state;
     const { totalPrice, quantity, deliveryAddress, phoneNumber } = inputFieldsData;
@@ -102,6 +104,7 @@ export class OrderForm extends Component {
                   totalPrice: '',
                 },
               });
+              removeMeal();
               hideModal();
             }}
             className="close"
@@ -185,6 +188,7 @@ OrderForm.propTypes = {
   orderError: PropTypes.array,
   orderComplete: PropTypes.bool,
   message: PropTypes.string,
+  removeMeal: PropTypes.func,
 };
 
 OrderForm.defaultProps = {
@@ -203,6 +207,7 @@ export const mapStateToProps = state => ({
 const mapDispatchToProps = {
   hideModal: ModalAction.hideModal,
   placeOrder: OrderAction.placeOrder,
+  removeMeal: MenuAction.removeMeal,
 };
 
 export default connect(
