@@ -85,6 +85,59 @@ const OrderAction = {
       }, 1000);
     }
   },
+  getUserOrders: userId => async dispatch => {
+    dispatch({
+      type: types.GET_USER_ORDERS,
+      payload: {
+        isLoading: true,
+        hasError: false,
+        fetchOrdersError: null,
+        orders: [],
+        processedOrders: [],
+        completedOrders: [],
+        newOrders: [],
+      },
+    });
+    try {
+      const res = await makeAPIRequest(`/users/${userId}/orders/`);
+      dispatch({
+        type: types.GET_USER_ORDERS_SUCCESS,
+        payload: {
+          isLoading: false,
+          hasError: false,
+          orders: res.orders,
+          newOrders: res.orders.filter(order => order.status === 'New'),
+          completedOrders: res.orders.filter(order => order.status === 'Complete'),
+          processedOrders: res.orders.filter(order => order.status === 'Processing'),
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: types.GET_USER_ORDERS_ERROR,
+        payload: {
+          isLoading: false,
+          hasError: true,
+          fetchOrdersError: { message: "Couldn't fetch your order history" },
+        },
+      });
+    }
+  },
+  fetchOrder: order => async dispatch => {
+    dispatch({
+      type: types.FETCH_ORDER,
+      payload: {
+        order,
+      },
+    });
+  },
+  removeOrder: () => async dispatch => {
+    dispatch({
+      type: types.REMOVE_ORDER,
+      payload: {
+        order: null,
+      },
+    });
+  },
 };
 
 export default OrderAction;

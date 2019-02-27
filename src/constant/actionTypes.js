@@ -18,6 +18,11 @@ const actionTypes = keyMirror({
   PLACE_ORDER_ERROR: null,
   FETCH_MEAL: null,
   HIDE_ORDER_MESSAGE: null,
+  FETCH_ORDER: null,
+  GET_USER_ORDERS: null,
+  GET_USER_ORDERS_SUCCESS: null,
+  GET_USER_ORDERS_ERROR: null,
+  REMOVE_ORDER: null,
 });
 
 export default actionTypes;

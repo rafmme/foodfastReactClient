@@ -6,8 +6,11 @@ import { AuthAction } from '../../../../actions/auth.action';
 
 export const UserNavLink = ({ logoutUser, history }) => (
   <>
-    <NavLink to="/" activeClassName="active">
+    <NavLink to="/menu" activeClassName="active">
       <i className="fa fa-list" /> Menu
+    </NavLink>
+    <NavLink to="/orders" activeClassName="active">
+      <i className="fa fa-money" /> My Orders
     </NavLink>
     <NavLink
       to="null"

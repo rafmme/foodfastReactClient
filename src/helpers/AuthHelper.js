@@ -17,4 +17,14 @@ export default class AuthHelper {
     }
     return true;
   }
+
+  static decodeToken(token) {
+    try {
+      const userObject = decode(token);
+      /* istanbul ignore next */
+      return userObject;
+    } catch (error) {
+      return {};
+    }
+  }
 }

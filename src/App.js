@@ -6,6 +6,8 @@ import Login from './components/views/Login/LoginForm';
 import SignUp from './components/views/SignUp/SignUpForm';
 import PrivateRoute from './hoc/PrivateRoute';
 import MealMenu from './components/views/Menu/Menu';
+import UserOrdersPage from './components/views/Order/UserOrdersPage/UserOrdersPage';
+import Home from './components/views/Home';
 
 export default () => (
   <BrowserRouter>
@@ -14,7 +16,9 @@ export default () => (
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
-        <PrivateRoute exact path="/" component={MealMenu} />
+        <PrivateRoute exact path="/menu" component={MealMenu} />
+        <PrivateRoute exact path="/orders" component={UserOrdersPage} />
+        <PrivateRoute exact path="/" component={Home} />
         <Route component={NotFound} />
       </Switch>
     </>
