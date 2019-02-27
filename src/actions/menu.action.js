@@ -41,6 +41,14 @@ const MenuAction = {
       },
     });
   },
+  removeMeal: () => async dispatch => {
+    dispatch({
+      type: types.REMOVE_MEAL,
+      payload: {
+        meal: {},
+      },
+    });
+  },
 };
 
 export default MenuAction;

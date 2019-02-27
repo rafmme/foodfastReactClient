@@ -5,9 +5,16 @@ import mockMenu from '../../__mocks__/mockMenu';
 
 const placeOrder = jest.fn();
 const hideModal = jest.fn();
+const removeMeal = jest.fn();
 const preventDefault = jest.fn();
 const wrap = mount(
-  <OrderForm placeOrder={placeOrder} hideModal={hideModal} history={{}} mealData={mockMenu[1]} />,
+  <OrderForm
+    placeOrder={placeOrder}
+    hideModal={hideModal}
+    history={{}}
+    mealData={mockMenu[1]}
+    removeMeal={removeMeal}
+  />,
 );
 
 describe('<OrderForm />', () => {
@@ -68,6 +75,7 @@ describe('<OrderForm />', () => {
     });
 
     expect(hideModal.mock.calls.length).toEqual(1);
+    expect(removeMeal.mock.calls.length).toEqual(1);
   });
 
   it('should render error message div', () => {

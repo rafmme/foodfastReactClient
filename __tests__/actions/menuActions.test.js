@@ -88,4 +88,22 @@ describe('Fetch Menu async actions', () => {
       done();
     });
   });
+
+  it('dispatches the REMOVE_MEAL action when removing the meal object from store', done => {
+    const expectedActions = [
+      {
+        type: types.REMOVE_MEAL,
+        payload: {
+          meal: {},
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(MenuAction.removeMeal()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
 });
