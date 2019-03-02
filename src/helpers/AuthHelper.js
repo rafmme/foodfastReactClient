@@ -2,8 +2,12 @@ import decode from 'jwt-decode';
 
 export default class AuthHelper {
   static checkUserIsAdmin(token) {
-    const { isAdmin } = decode(token);
-    return isAdmin;
+    try {
+      const { isAdmin } = decode(token);
+      return isAdmin;
+    } catch (error) {
+      return false;
+    }
   }
 
   static checkUserIsAuthenticated(token) {

@@ -481,6 +481,10 @@ button:hover {
     color: orange;
 }
 
+.text-blue {
+    color: #1A0CAB;
+}
+
 .btn {
     padding: .5em 3em;
     width: 100%;

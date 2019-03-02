@@ -138,6 +138,43 @@ const OrderAction = {
       },
     });
   },
+  getAllOrders: () => async dispatch => {
+    dispatch({
+      type: types.GET_ALL_ORDERS,
+      payload: {
+        isLoading: true,
+        hasError: false,
+        fetchOrdersError: null,
+        orders: [],
+        processedOrders: [],
+        completedOrders: [],
+        newOrders: [],
+      },
+    });
+    try {
+      const res = await makeAPIRequest(`/orders/`);
+      dispatch({
+        type: types.GET_ALL_ORDERS_SUCCESS,
+        payload: {
+          isLoading: false,
+          hasError: false,
+          orders: res.orders,
+          newOrders: res.orders.filter(order => order.status === 'New'),
+          completedOrders: res.orders.filter(order => order.status === 'Complete'),
+          processedOrders: res.orders.filter(order => order.status === 'Processing'),
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: types.GET_ALL_ORDERS_ERROR,
+        payload: {
+          isLoading: false,
+          hasError: true,
+          fetchOrdersError: { message: "Couldn't fetch all orders" },
+        },
+      });
+    }
+  },
 };
 
 export default OrderAction;

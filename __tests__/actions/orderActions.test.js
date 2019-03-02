@@ -271,4 +271,80 @@ describe('OrderAction Test', () => {
       done();
     });
   });
+
+  it('dispatches the GET_ALL_ORDERS_SUCCESS action when all orders was fetched', done => {
+    mock.onGet('/orders/', {}).reply(200, {
+      success: true,
+      status: 200,
+      message: 'All orders fetched successfully',
+      orders: mockOrders,
+    });
+
+    const expectedActions = [
+      {
+        type: types.GET_ALL_ORDERS,
+        payload: {
+          isLoading: true,
+          hasError: false,
+          fetchOrdersError: null,
+          orders: [],
+          processedOrders: [],
+          completedOrders: [],
+          newOrders: [],
+        },
+      },
+      {
+        type: types.GET_ALL_ORDERS_SUCCESS,
+        payload: {
+          isLoading: false,
+          hasError: false,
+          orders: mockOrders,
+          newOrders: mockOrders.filter(order => order.status === 'New'),
+          completedOrders: mockOrders.filter(order => order.status === 'Complete'),
+          processedOrders: mockOrders.filter(order => order.status === 'Processing'),
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(OrderAction.getAllOrders()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
+
+  it('dispatches the GET_ALL_ORDERS_ERROR action when the fetching all orders failed', done => {
+    mock.onGet('/orders/', {}).networkError();
+
+    const expectedActions = [
+      {
+        type: types.GET_ALL_ORDERS,
+        payload: {
+          isLoading: true,
+          hasError: false,
+          fetchOrdersError: null,
+          orders: [],
+          processedOrders: [],
+          completedOrders: [],
+          newOrders: [],
+        },
+      },
+      {
+        type: types.GET_ALL_ORDERS_ERROR,
+        payload: {
+          isLoading: false,
+          hasError: true,
+          fetchOrdersError: { message: "Couldn't fetch all orders" },
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(OrderAction.getAllOrders()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      done();
+    });
+  });
 });
