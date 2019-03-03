@@ -24,6 +24,9 @@ const actionTypes = keyMirror({
   GET_USER_ORDERS_ERROR: null,
   REMOVE_ORDER: null,
   REMOVE_MEAL: null,
+  GET_ALL_ORDERS: null,
+  GET_ALL_ORDERS_SUCCESS: null,
+  GET_ALL_ORDERS_ERROR: null,
 });
 
 export default actionTypes;

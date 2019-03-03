@@ -8,6 +8,8 @@ import PrivateRoute from './hoc/PrivateRoute';
 import MealMenu from './components/views/Menu/Menu';
 import UserOrdersPage from './components/views/Order/UserOrdersPage/UserOrdersPage';
 import Home from './components/views/Home';
+import AdminRoute from './hoc/AdminRoute';
+import AdminHomePage from './components/views/Admin/AdminHome';
 
 export default () => (
   <BrowserRouter>
@@ -19,6 +21,7 @@ export default () => (
         <PrivateRoute exact path="/menu" component={MealMenu} />
         <PrivateRoute exact path="/orders" component={UserOrdersPage} />
         <PrivateRoute exact path="/" component={Home} />
+        <AdminRoute exact path="/admin" component={AdminHomePage} />
         <Route component={NotFound} />
       </Switch>
     </>
