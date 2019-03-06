@@ -35,9 +35,11 @@ export class Menu extends Component {
             <HeroSearchBox />
           </ShowCase>
           <MenuData
-            render={({ menu }) => (
-              <MealList menu={menu} isLoading={isLoading} hasError={hasError} />
-            )}
+            render={
+              /* istanbul ignore next */ ({ menu }) => (
+                <MealList menu={menu} isLoading={isLoading} hasError={hasError} />
+              )
+            }
           />
         </div>
         <Modal isOpened={isOpened}>

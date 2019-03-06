@@ -12,6 +12,9 @@ export const AdminNavLink = ({ logoutUser, history }) => (
     <NavLink to="/admin" activeClassName="active">
       <i className="fa fa-home" /> Home
     </NavLink>
+    <NavLink to="/adm/menu" activeClassName="active">
+      <i className="fa fa-list" /> Menu
+    </NavLink>
     <NavLink
       to="null"
       id="log-out"
