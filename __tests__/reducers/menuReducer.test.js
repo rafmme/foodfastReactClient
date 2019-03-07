@@ -4,10 +4,14 @@ import mockMenu from '../../__mocks__/mockMenu';
 
 const initialState = {
   isLoading: false,
+  addMealLoader: false,
   hasError: false,
   fetchMenuError: null,
   menu: [],
   meal: {},
+  mealError: null,
+  mealAdded: false,
+  message: null,
 };
 
 describe('Menu Reducer', () => {
@@ -83,6 +87,62 @@ describe('Menu Reducer', () => {
     expect(
       menuReducer(initialState, {
         type: types.REMOVE_MEAL,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for ADD_MEAL action', () => {
+    const payload = {};
+
+    expect(
+      menuReducer(initialState, {
+        type: types.ADD_MEAL,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for ADD_MEAL_ERROR action', () => {
+    const payload = {};
+
+    expect(
+      menuReducer(initialState, {
+        type: types.ADD_MEAL_ERROR,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for ADD_MEAL_SUCCESS action', () => {
+    const payload = {};
+
+    expect(
+      menuReducer(initialState, {
+        type: types.ADD_MEAL_SUCCESS,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for HIDE_MEAL_MESSAGE action', () => {
+    const payload = {};
+
+    expect(
+      menuReducer(initialState, {
+        type: types.HIDE_MEAL_MESSAGE,
         payload,
       }),
     ).toEqual({

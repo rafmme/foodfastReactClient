@@ -9,10 +9,12 @@ import Modal from '../../Modal/Modal';
 import Footer from '../../Footer/Footer';
 import Menu from './MenuView';
 import MenuData from '../../../containers/Meal/MealData';
+import AddMealForm from './MealForm';
+import ModalAction from '../../../../actions/modal.action';
 
 export class AdminMenu extends Component {
   render() {
-    const { isLoading, fetchMenuError, isOpened, hasError } = this.props;
+    const { isLoading, fetchMenuError, isOpened, hasError, showModal } = this.props;
 
     if (hasError) {
       return <NetworkError hasError={hasError} errorMessage={fetchMenuError} />;
@@ -48,7 +50,17 @@ export class AdminMenu extends Component {
                   </div>
                 </div>
               </form>
-              <button type="submit" className="add-meal-btn el-card">
+              <button
+                id="addMealBtn"
+                type="button"
+                onClick={
+                  /* istanbul ignore next */ e => {
+                    e.preventDefault();
+                    showModal();
+                  }
+                }
+                className="add-meal-btn el-card"
+              >
                 <i className="fa fa-plus" /> Add New Food
               </button>
             </div>
@@ -63,7 +75,7 @@ export class AdminMenu extends Component {
           </div>
         </div>
         <Modal isOpened={isOpened}>
-          <p>Hello</p>
+          <AddMealForm />
         </Modal>
         <Footer />
       </>
@@ -79,13 +91,16 @@ const mapStateToProps = state => ({
   fetchMenuError: state.menu.fetchMenuError,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  showModal: ModalAction.showModal,
+};
 
 AdminMenu.propTypes = {
   isLoading: PropTypes.bool,
   hasError: PropTypes.bool,
   isOpened: PropTypes.bool,
   fetchMenuError: PropTypes.object,
+  showModal: PropTypes.func,
 };
 
 export default connect(

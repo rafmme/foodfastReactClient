@@ -27,6 +27,10 @@ const actionTypes = keyMirror({
   GET_ALL_ORDERS: null,
   GET_ALL_ORDERS_SUCCESS: null,
   GET_ALL_ORDERS_ERROR: null,
+  ADD_MEAL: null,
+  ADD_MEAL_SUCCESS: null,
+  ADD_MEAL_ERROR: null,
+  HIDE_MEAL_MESSAGE: null,
 });
 
 export default actionTypes;
