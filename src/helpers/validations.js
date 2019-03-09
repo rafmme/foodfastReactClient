@@ -78,6 +78,55 @@ const validateOrderInput = ({ quantity, phoneNumber, deliveryAddress }) => {
   return errors;
 };
 
+/**
+ * @description a function to validate new meal data input
+ * @param {String} title
+ * @param {String} description
+ * @param {String} price
+ * @param {Object} image
+ * @returns {Object} an objects containing the error messages
+ */
+/* istanbul ignore next */
+const validateMealInput = ({ title, description, price, image }) => {
+  const errors = {};
+  if (title.trim() === '') {
+    errors.title = "Food item title field can't be empty";
+  }
+  if (title.trim() !== '' && (title.length < 3 || title.length > 150)) {
+    errors.title = 'Food item title field should be within the range of 3 - 150 characters';
+  }
+  if (description.trim() === '') {
+    errors.description = "Description field can't be empty";
+  }
+  if (description.trim() !== '' && (description.length < 3 || description.length > 300)) {
+    errors.description = 'Description field should be within the range of 3 - 300 characters';
+  }
+  if (Number.isNaN(price)) {
+    errors.price = 'Price of food item should be a number';
+  }
+  if (`${price}`[0] === '-' || price === 0) {
+    errors.price = 'Price of food item is invalid';
+  }
+  if (!image.files) {
+    errors.image = 'Image upload field is empty';
+  }
+  if (image.files && image.files.length === 1) {
+    if (image.files[0].size && image.files[0].size > 5000000) {
+      errors.image = 'Image size should not be more than 5MB';
+    }
+    if (
+      image.files[0].type &&
+      (image.files[0].type !== 'image/png' &&
+        image.files[0].type !== 'image/jpeg' &&
+        image.files[0].type !== 'image/gif')
+    ) {
+      errors.image = 'You are trying to upload an invalid image type';
+    }
+  }
+
+  return errors;
+};
+
 const extractErrorMessages = arrayOfMessages => {
   let text = '';
   arrayOfMessages.forEach(message => {
@@ -86,4 +135,10 @@ const extractErrorMessages = arrayOfMessages => {
   return text;
 };
 
-export { validateLoginInput, extractErrorMessages, validateSignUpInput, validateOrderInput };
+export {
+  validateLoginInput,
+  extractErrorMessages,
+  validateSignUpInput,
+  validateOrderInput,
+  validateMealInput,
+};

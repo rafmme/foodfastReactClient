@@ -2,7 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminMenu } from '../../../src/components/views/Admin/Menu/AdminMenu';
 
-const wrap = shallow(<AdminMenu isLoading={false} isOpened={false} hasError={false} />);
+const showModal = jest.fn();
+const wrap = shallow(
+  <AdminMenu showModal={showModal} isLoading={false} isOpened={false} hasError={false} />,
+);
 
 describe('<AdminMenu />', () => {
   it('should render successfully', () => {
