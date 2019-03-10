@@ -5,4 +5,4 @@
 this is an implement of the foodfast client [front-end] with the ReactJS library
 
 ## App UI
-![alt tag](https://github.com/rafmme/foodfastReactClient/blob/dev/ui.png "UI View")
+![alt tag](https://github.com/rafmme/foodfastReactClient/blob/dev/ui.pnng "UI View")

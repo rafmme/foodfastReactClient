@@ -16,6 +16,7 @@ import OrderStat from '../Order/UserOrdersPage/OrderStat';
 import OrderAction from '../../../actions/order.action';
 import OrderView from './OrderView';
 import OrderData from '../Order/OrderTable/OrderInfo';
+import AlertMessage from './AlertMessage';
 
 export class AdminHome extends Component {
   componentDidMount() {
@@ -34,6 +35,8 @@ export class AdminHome extends Component {
       completedOrders,
       fetchOrdersError,
       order,
+      orderUpdateMessage,
+      orderUpdated,
     } = this.props;
 
     if (hasError) {
@@ -46,6 +49,8 @@ export class AdminHome extends Component {
           <NavigationBar>
             <AdminNavigationLink />
           </NavigationBar>
+          {/* istanbul ignore next */
+          orderUpdated && orderUpdateMessage && <AlertMessage message={orderUpdateMessage} />}
           <OrderStat>
             <NewOrders count={newOrders.length} />
             <ProcessedOrders count={processedOrders.length} />
@@ -77,6 +82,8 @@ const mapStateToProps = state => ({
   completedOrders: state.adminOrder.completedOrders,
   newOrders: state.adminOrder.newOrders,
   order: state.order.order,
+  orderUpdated: state.order.orderUpdated,
+  orderUpdateMessage: state.order.orderUpdateMessage,
 });
 
 const mapDispatchToProps = {
@@ -94,6 +101,8 @@ AdminHome.propTypes = {
   processedOrders: PropTypes.array,
   order: PropTypes.object,
   fetchAllOrders: PropTypes.func,
+  orderUpdated: PropTypes.bool,
+  orderUpdateMessage: PropTypes.string,
 };
 
 export default connect(

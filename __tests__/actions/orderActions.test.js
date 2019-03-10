@@ -347,4 +347,35 @@ describe('OrderAction Test', () => {
       done();
     });
   });
+
+  it('dispatches the UPDATE_ORDERS_ERROR action when order update fails', done => {
+    mock.onPut('/orders/49c67d58-cce4-49a6-883b-930e65dc08fb', {}).networkError();
+
+    const expectedActions = [
+      {
+        type: types.UPDATE_OPDER,
+        payload: {
+          orderUpdateMessage: null,
+          updateOrder: true,
+          orderUpdated: false,
+        },
+      },
+      {
+        type: types.UPDATE_ORDER_ERROR,
+        payload: {
+          updateOrder: false,
+          orderUpdated: false,
+        },
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store
+      .dispatch(OrderAction.updateOrder('Complete', '49c67d58-cce4-49a6-883b-930e65dc08fb'))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+  });
 });
