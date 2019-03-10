@@ -32,7 +32,7 @@ export class AdminMenu extends Component {
             </h2>
             <div className="row table-padding">
               <form action="#">
-                <div className="row order-box-p" style={{ width: '70%' }}>
+                <div className="row order-box-p" style={{ width: '70%', display: 'none' }}>
                   <div className="col-3-2">
                     <input
                       type="search"
@@ -66,9 +66,10 @@ export class AdminMenu extends Component {
             </div>
             <br />
             <MenuData
+              itemsPerPage={8}
               render={
-                /* istanbul ignore next */ ({ menu }) => (
-                  <Menu menu={menu} isLoading={isLoading} hasError={hasError} />
+                /* istanbul ignore next */ paginatedLists => (
+                  <Menu menu={paginatedLists} isLoading={isLoading} hasError={hasError} />
                 )
               }
             />

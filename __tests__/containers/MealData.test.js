@@ -5,7 +5,9 @@ import mockMenu from '../../__mocks__/mockMenu';
 
 const fetchMenu = jest.fn();
 const render = jest.fn();
-const wrap = shallow(<MealData menu={mockMenu} render={render} fetchMenu={fetchMenu} />);
+const wrap = shallow(
+  <MealData itemsPerPage={1} menu={mockMenu} render={render} fetchMenu={fetchMenu} />,
+);
 
 describe('<MealData />', () => {
   it('should render successfully', () => {

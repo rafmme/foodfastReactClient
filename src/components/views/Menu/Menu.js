@@ -35,9 +35,10 @@ export class Menu extends Component {
             <HeroSearchBox />
           </ShowCase>
           <MenuData
+            itemsPerPage={8}
             render={
-              /* istanbul ignore next */ ({ menu }) => (
-                <MealList menu={menu} isLoading={isLoading} hasError={hasError} />
+              /* istanbul ignore next */ paginatedLists => (
+                <MealList menu={paginatedLists} isLoading={isLoading} hasError={hasError} />
               )
             }
           />
