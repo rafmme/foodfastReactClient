@@ -8,7 +8,10 @@ export default class SearchFilterBox extends Component {
 
   render() {
     return (
-      <div className="row order-box-p" style={{ width: '70%' }}>
+      <div
+        className="row order-box-p"
+        style={{ width: '70%', visibility: 'hidden', margin: '0px' }}
+      >
         <div className="col-3-2">
           <input
             type="search"

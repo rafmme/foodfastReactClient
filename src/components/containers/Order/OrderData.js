@@ -1,34 +1,31 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-new */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import MenuAction from '../../../actions/menu.action';
 import PageNumbers from '../../views/Pagination/PageNumbers';
 
-export class MealData extends React.Component {
+export default class OrderContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { currentPage: 0 };
     this.onClickPageNumber = this.onClickPageNumber.bind(this);
   }
 
-  componentDidMount() {
-    const { fetchMenu } = this.props;
-    fetchMenu();
-  }
-
   getNumberOfPages(itemsPerPage) {
-    const { menu } = this.props;
-    const numberOfPages = Math.ceil(menu.length / itemsPerPage);
+    const { orders } = this.props;
+    const numberOfPages = Math.ceil(orders.length / itemsPerPage);
     return Array.from(Array(numberOfPages).keys());
   }
 
   paginatedLists = itemsPerPage => {
     const { currentPage } = this.state;
-    const { menu } = this.props;
+    const { orders } = this.props;
 
-    if (!Array.isArray(menu)) new Error('Invalid supplied Lists.');
-    return menu.slice(
+    if (!Array.isArray(orders)) new Error('Invalid supplied Lists.');
+    return orders.slice(
       currentPage * parseInt(itemsPerPage, 0),
       (currentPage + 1) * parseInt(itemsPerPage, 0),
     );
@@ -56,19 +53,8 @@ export class MealData extends React.Component {
   }
 }
 
-MealData.propTypes = {
+OrderContainer.propTypes = {
   render: PropTypes.func.isRequired,
-  menu: PropTypes.array.isRequired,
-  fetchMenu: PropTypes.func.isRequired,
+  orders: PropTypes.array.isRequired,
   itemsPerPage: PropTypes.number,
 };
-
-const mapStateToProps = state => ({
-  menu: state.menu.menu,
-});
-const mapDispatchToProps = { fetchMenu: MenuAction.fetchMenu };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MealData);

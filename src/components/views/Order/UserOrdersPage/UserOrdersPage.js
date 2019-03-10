@@ -17,6 +17,7 @@ import SearchFilterBox from '../../SearchFilterBox/SearchFilterBox';
 import OrderData from '../OrderTable/OrderInfo';
 import OrderAction from '../../../../actions/order.action';
 import AuthHelper from '../../../../helpers/AuthHelper';
+import OrderContainer from '../../../containers/Order/OrderData';
 
 export class UserOrders extends Component {
   componentDidMount() {
@@ -56,7 +57,15 @@ export class UserOrders extends Component {
           </OrderStat>
           <div className="row table-padding">
             <SearchFilterBox />
-            <OrderTable orderList={orders} />
+            <OrderContainer
+              orders={orders}
+              itemsPerPage={8}
+              render={
+                /* istanbul ignore next */ paginatedLists => (
+                  <OrderTable orderList={paginatedLists} />
+                )
+              }
+            />
           </div>
         </div>
         <Modal isOpened={isOpened}>
