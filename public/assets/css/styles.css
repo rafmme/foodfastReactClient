@@ -90,10 +90,6 @@ body {
     border-radius: 5px;
 }
 
-#order-alert-div {
-    display: none;
-}
-
 .alert p {
     height: auto;
     width: auto;
@@ -290,6 +286,10 @@ textarea {
 .add-meal-btn:hover {
     background: orange !important;
     color: #FFF !important;
+}
+
+.bg-gray {
+    background: darkgray;
 }
 
 .bg-green {

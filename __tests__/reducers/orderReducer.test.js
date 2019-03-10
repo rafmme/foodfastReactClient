@@ -13,6 +13,9 @@ const initialState = {
   orderError: null,
   orderComplete: false,
   message: null,
+  orderUpdateMessage: null,
+  updateOrder: false,
+  orderUpdated: false,
 };
 
 describe('Order Reducer', () => {
@@ -148,6 +151,48 @@ describe('Order Reducer', () => {
     expect(
       orderReducer(initialState, {
         type: types.HIDE_ORDER_MESSAGE,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for UPDATE_ORDER action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.UPDATE_OPDER,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for UPDATE_ORDER_SUCCESS action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.UPDATE_ORDER_SUCCESS,
+        payload,
+      }),
+    ).toEqual({
+      ...initialState,
+      ...payload,
+    });
+  });
+
+  it('update the state for UPDATE_ORDER_ERROR action', () => {
+    const payload = {};
+
+    expect(
+      orderReducer(initialState, {
+        type: types.UPDATE_ORDER_ERROR,
         payload,
       }),
     ).toEqual({

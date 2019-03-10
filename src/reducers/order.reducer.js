@@ -12,6 +12,9 @@ const initialState = {
   orderError: null,
   orderComplete: false,
   message: null,
+  orderUpdateMessage: null,
+  updateOrder: false,
+  orderUpdated: false,
 };
 
 export default (state = initialState, action) => {
@@ -57,6 +60,21 @@ export default (state = initialState, action) => {
         ...action.payload,
       };
     case types.REMOVE_ORDER:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case types.UPDATE_OPDER:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case types.UPDATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case types.UPDATE_ORDER_ERROR:
       return {
         ...state,
         ...action.payload,

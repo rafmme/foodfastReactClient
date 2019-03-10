@@ -175,6 +175,76 @@ const OrderAction = {
       });
     }
   },
+  updateOrder: (newOrderStatus, orderId) => async dispatch => {
+    dispatch({
+      type: types.UPDATE_OPDER,
+      payload: {
+        orderUpdateMessage: null,
+        updateOrder: true,
+        orderUpdated: false,
+      },
+    });
+    /* istanbul ignore next */
+    try {
+      await makeAPIRequest(`/orders/${orderId}/`, {
+        method: 'PUT',
+        body: { status: newOrderStatus },
+      });
+      dispatch({
+        type: types.UPDATE_ORDER_SUCCESS,
+        payload: {
+          orderUpdateMessage: `Order #${orderId.slice(0, 8)} status is now ${newOrderStatus}`,
+          updateOrder: false,
+          orderUpdated: true,
+        },
+      });
+
+      setTimeout(async () => {
+        dispatch({
+          type: types.HIDE_ORDER_MESSAGE,
+          payload: {
+            orderUpdateMessage: null,
+            updateOrder: false,
+            orderUpdated: false,
+          },
+        });
+
+        dispatch({
+          type: types.GET_ALL_ORDERS,
+          payload: {
+            isLoading: true,
+            hasError: false,
+            fetchOrdersError: null,
+            orders: [],
+            processedOrders: [],
+            completedOrders: [],
+            newOrders: [],
+          },
+        });
+
+        const res = await makeAPIRequest(`/orders/`);
+        dispatch({
+          type: types.GET_ALL_ORDERS_SUCCESS,
+          payload: {
+            isLoading: false,
+            hasError: false,
+            orders: res.orders.reverse(),
+            newOrders: res.orders.filter(order => order.status === 'New'),
+            completedOrders: res.orders.filter(order => order.status === 'Complete'),
+            processedOrders: res.orders.filter(order => order.status === 'Processing'),
+          },
+        });
+      }, 1350);
+    } catch (error) {
+      dispatch({
+        type: types.UPDATE_ORDER_ERROR,
+        payload: {
+          updateOrder: false,
+          orderUpdated: false,
+        },
+      });
+    }
+  },
 };
 
 export default OrderAction;

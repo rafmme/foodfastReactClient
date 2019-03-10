@@ -22,7 +22,7 @@ export class OrderCard extends Component {
   };
 
   render() {
-    const { order, fetchOrder, showModal } = this.props;
+    const { order, fetchOrder, showModal, updateOrder, updateOrderStatus } = this.props;
     const { showMenuIcon } = this.state;
     const {
       orderId,
@@ -63,13 +63,29 @@ export class OrderCard extends Component {
             {/* istanbul ignore next */ status === 'New' && (
               <>
                 <li className="el-card">
-                  <a id="accept" className="bg-green" href="/">
+                  <a
+                    id="accept"
+                    className={updateOrder ? 'bg-gray' : 'bg-green'}
+                    href="/"
+                    onClick={e => {
+                      e.preventDefault();
+                      updateOrderStatus('Processing', orderId);
+                    }}
+                  >
                     <i className="fa fa-check" />
                     Accept
                   </a>
                 </li>
                 <li className="el-card">
-                  <a id="cancel" className="bg-red" href="/">
+                  <a
+                    id="cancel"
+                    className={updateOrder ? 'bg-gray' : 'bg-red'}
+                    href="/"
+                    onClick={e => {
+                      e.preventDefault();
+                      updateOrderStatus('Cancelled', orderId);
+                    }}
+                  >
                     <i className="fa fa-trash-o" />
                     Reject
                   </a>
@@ -78,7 +94,14 @@ export class OrderCard extends Component {
             )}
             {/* istanbul ignore next */ status === 'Processing' && (
               <li className="el-card">
-                <a href="/" className="bg-green">
+                <a
+                  href="/"
+                  className={updateOrder ? 'bg-gray' : 'bg-green'}
+                  onClick={e => {
+                    e.preventDefault();
+                    updateOrderStatus('Complete', orderId);
+                  }}
+                >
                   <i className="fa fa-edit" />
                   Update
                 </a>
@@ -128,14 +151,21 @@ OrderCard.propTypes = {
   order: PropTypes.object,
   fetchOrder: PropTypes.func,
   showModal: PropTypes.func,
+  updateOrder: PropTypes.bool,
+  updateOrderStatus: PropTypes.func,
 };
+
+const mapStateToProps = state => ({
+  updateOrder: state.order.updateOrder,
+});
 
 const mapDispatchToProps = {
   fetchOrder: OrderAction.fetchOrder,
   showModal: ModalAction.showModal,
+  updateOrderStatus: OrderAction.updateOrder,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(OrderCard);
