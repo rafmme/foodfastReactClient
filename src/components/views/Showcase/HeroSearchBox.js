@@ -23,7 +23,7 @@ class HeroSearchBox extends Component {
         <h2 className="text-white bg-green animate" id="showcase-message">
           Looking for what to eat?
         </h2>
-        <div className="input-group">
+        <div className="input-group" style={{ visibility: 'hidden' }}>
           <input
             type="search"
             name="searchBox"

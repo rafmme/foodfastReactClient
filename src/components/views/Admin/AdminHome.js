@@ -17,6 +17,7 @@ import OrderAction from '../../../actions/order.action';
 import OrderView from './OrderView';
 import OrderData from '../Order/OrderTable/OrderInfo';
 import AlertMessage from './AlertMessage';
+import OrderContainer from '../../containers/Order/OrderData';
 
 export class AdminHome extends Component {
   componentDidMount() {
@@ -59,7 +60,15 @@ export class AdminHome extends Component {
           </OrderStat>
           <div className="row table-padding">
             <SearchFilterBox />
-            <OrderView orderList={orders} />
+            <OrderContainer
+              orders={orders}
+              itemsPerPage={4}
+              render={
+                /* istanbul ignore next */ paginatedLists => (
+                  <OrderView orderList={paginatedLists} />
+                )
+              }
+            />
           </div>
         </div>
         <Modal isOpened={isOpened}>
